@@ -74,7 +74,10 @@ module GooglePlaces
         :language => language,
         :keyword => keyword,
         :retry_options => retry_options
-      }
+      }.merge(options).inject({}) do |h, (k,v)|
+        h[k] = v unless v.nil?
+        h
+      end
 
       options[:zagatselected] = zagat_selected if zagat_selected
 
